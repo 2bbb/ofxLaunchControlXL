@@ -2,6 +2,11 @@
 
 use [novation LAUNCH CONTROL XL](http://global.novationmusic.com/launch/launch-control-xl) with openframeworks
 
+## Dependencies
+
+* ofxXmlSettings
+* [ofxMidi](https://github.com/danomatika/ofxMidi) by [danomiatka](https://github.com/danomatika/)
+
 ## API
 
 * void registerValue(Type &value, ofxLaunchControlXL::Type type)
@@ -9,7 +14,7 @@ use [novation LAUNCH CONTROL XL](http://global.novationmusic.com/launch/launch-c
 
 Type is integer type of floating point type.
 
-## if you use Customized Launch Control XL
+### if you use Customized Launch Control XL
 
 edit launch_control_xl_settings.xml (default xml is automatically add to bin/data)
 
