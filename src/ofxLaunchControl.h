@@ -372,7 +372,7 @@ private:
         if(!hasLED(note)) return;
         led_sysex_message[7] = currentTemplateIndex;
         led_sysex_message[8] = led_map[note];
-        led_sysex_message[9] = createLEDValue(value ? (value / 43 + 1) : 0, value ? (value / 43 + 1) : 0);
+        led_sysex_message[9] = createLEDValue(0, value ? (value / 43 + 1) : 0);
         midiOut.sendMidiBytes(led_sysex_message);
     }
     
