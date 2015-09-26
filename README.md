@@ -9,6 +9,10 @@ use [novation LAUNCH CONTROL XL](http://global.novationmusic.com/launch/launch-c
 
 Type is integer type of floating point type.
 
+## if you use Customized Launch Control XL
+
+edit launch_control_xl_settings.xml (default xml is automatically add to bin/data)
+
 ## Update history
 
 ### 2015/09/26 ver 0.0.1 release

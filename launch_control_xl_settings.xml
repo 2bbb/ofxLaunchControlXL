@@ -1,0 +1,385 @@
+<launch_control_xl>
+	<template id="0"><!-- user template 1 -->
+		<knobs>
+			<top><ch continuous="8" type="control" value="13" /></top>
+			<center><ch continuous="8" type="control" value="29" /></center>
+			<bottom><ch continuous="8" type="control" value="49" /></bottom>
+		</knobs>
+		<faders><ch continuous="8" type="control" value="77" /></faders>
+		<buttons>
+			<top>
+				<ch continuous="4" type="note" value="41" />
+				<ch continuous="4" type="note" value="57" />
+			</top>
+			<bottom>
+				<ch continuous="4" type="note" value="73" />
+				<ch continuous="4" type="note" value="89" />
+			</bottom>
+		</buttons>
+		<cursors>
+			<ch continuous="4" type="control" value="104" />
+		</cursors>
+		<other_buttons>
+			<ch continuous="4" type="note" value="105" />
+		</other_buttons>
+	</template>
+	<template id="1"><!-- user template 2 -->
+		<knobs>
+			<top><ch continuous="8" type="control" value="13" /></top>
+			<center><ch continuous="8" type="control" value="29" /></center>
+			<bottom><ch continuous="8" type="control" value="49" /></bottom>
+		</knobs>
+		<faders><ch continuous="8" type="control" value="77" /></faders>
+		<buttons>
+			<top>
+				<ch continuous="4" type="note" value="41" />
+				<ch continuous="4" type="note" value="57" />
+			</top>
+			<bottom>
+				<ch continuous="4" type="note" value="73" />
+				<ch continuous="4" type="note" value="89" />
+			</bottom>
+		</buttons>
+		<cursors>
+			<ch continuous="4" type="control" value="104" />
+		</cursors>
+		<other_buttons>
+			<ch continuous="4" type="note" value="105" />
+		</other_buttons>
+	</template>
+	<template id="2"><!-- user template 3 -->
+		<knobs>
+			<top><ch continuous="8" type="control" value="13" /></top>
+			<center><ch continuous="8" type="control" value="29" /></center>
+			<bottom><ch continuous="8" type="control" value="49" /></bottom>
+		</knobs>
+		<faders><ch continuous="8" type="control" value="77" /></faders>
+		<buttons>
+			<top>
+				<ch continuous="4" type="note" value="41" />
+				<ch continuous="4" type="note" value="57" />
+			</top>
+			<bottom>
+				<ch continuous="4" type="note" value="73" />
+				<ch continuous="4" type="note" value="89" />
+			</bottom>
+		</buttons>
+		<cursors>
+			<ch continuous="4" type="control" value="104" />
+		</cursors>
+		<other_buttons>
+			<ch continuous="4" type="note" value="105" />
+		</other_buttons>
+	</template>
+	<template id="3"><!-- user template 4 -->
+		<knobs>
+			<top><ch continuous="8" type="control" value="13" /></top>
+			<center><ch continuous="8" type="control" value="29" /></center>
+			<bottom><ch continuous="8" type="control" value="49" /></bottom>
+		</knobs>
+		<faders><ch continuous="8" type="control" value="77" /></faders>
+		<buttons>
+			<top>
+				<ch continuous="4" type="note" value="41" />
+				<ch continuous="4" type="note" value="57" />
+			</top>
+			<bottom>
+				<ch continuous="4" type="note" value="73" />
+				<ch continuous="4" type="note" value="89" />
+			</bottom>
+		</buttons>
+		<cursors>
+			<ch continuous="4" type="control" value="104" />
+		</cursors>
+		<other_buttons>
+			<ch continuous="4" type="note" value="105" />
+		</other_buttons>
+	</template>
+	<template id="4"><!-- user template 5 -->
+		<knobs>
+			<top><ch continuous="8" type="control" value="13" /></top>
+			<center><ch continuous="8" type="control" value="29" /></center>
+			<bottom><ch continuous="8" type="control" value="49" /></bottom>
+		</knobs>
+		<faders><ch continuous="8" type="control" value="77" /></faders>
+		<buttons>
+			<top>
+				<ch continuous="4" type="note" value="41" />
+				<ch continuous="4" type="note" value="57" />
+			</top>
+			<bottom>
+				<ch continuous="4" type="note" value="73" />
+				<ch continuous="4" type="note" value="89" />
+			</bottom>
+		</buttons>
+		<cursors>
+			<ch continuous="4" type="control" value="104" />
+		</cursors>
+		<other_buttons>
+			<ch continuous="4" type="note" value="105" />
+		</other_buttons>
+	</template>
+	<template id="5"><!-- user template 6 -->
+		<knobs>
+			<top><ch continuous="8" type="control" value="13" /></top>
+			<center><ch continuous="8" type="control" value="29" /></center>
+			<bottom><ch continuous="8" type="control" value="49" /></bottom>
+		</knobs>
+		<faders><ch continuous="8" type="control" value="77" /></faders>
+		<buttons>
+			<top>
+				<ch continuous="4" type="note" value="41" />
+				<ch continuous="4" type="note" value="57" />
+			</top>
+			<bottom>
+				<ch continuous="4" type="note" value="73" />
+				<ch continuous="4" type="note" value="89" />
+			</bottom>
+		</buttons>
+		<cursors>
+			<ch continuous="4" type="control" value="104" />
+		</cursors>
+		<other_buttons>
+			<ch continuous="4" type="note" value="105" />
+		</other_buttons>
+	</template>
+	<template id="6"><!-- user template 7 -->
+		<knobs>
+			<top><ch continuous="8" type="control" value="13" /></top>
+			<center><ch continuous="8" type="control" value="29" /></center>
+			<bottom><ch continuous="8" type="control" value="21" /></bottom>
+		</knobs>
+		<faders><ch continuous="8" type="control" value="48" /></faders>
+		<buttons>
+			<top>
+				<ch continuous="8" type="control" value="89" />
+			</top>
+			<bottom>
+				<ch continuous="4" type="note" value="9" />
+				<ch continuous="4" type="note" value="25" />
+			</bottom>
+		</buttons>
+		<cursors>
+			<ch continuous="4" type="control" value="114" />
+		</cursors>
+		<other_buttons>
+			<ch continuous="4" type="note" value="57" />
+		</other_buttons>
+	</template>
+	<template id="7"><!-- user template 8 -->
+		<knobs>
+			<top><ch continuous="8" type="control" value="13" /></top>
+			<center><ch continuous="8" type="control" value="29" /></center>
+			<bottom><ch continuous="8" type="control" value="49" /></bottom>
+		</knobs>
+		<faders><ch continuous="8" type="control" value="77" /></faders>
+		<buttons>
+			<top>
+				<ch continuous="4" type="note" value="41" />
+				<ch continuous="4" type="note" value="57" />
+			</top>
+			<bottom>
+				<ch continuous="4" type="note" value="73" />
+				<ch continuous="4" type="note" value="89" />
+			</bottom>
+		</buttons>
+		<cursors>
+			<ch continuous="4" type="control" value="104" />
+		</cursors>
+		<other_buttons>
+			<ch continuous="4" type="note" value="105" />
+		</other_buttons>
+	</template>
+	<template id="8"><!-- factory template 1 -->
+		<knobs>
+			<top><ch continuous="8" type="control" value="13" /></top>
+			<center><ch continuous="8" type="control" value="29" /></center>
+			<bottom><ch continuous="8" type="control" value="49" /></bottom>
+		</knobs>
+		<faders><ch continuous="8" type="control" value="77" /></faders>
+		<buttons>
+			<top>
+				<ch continuous="4" type="note" value="41" />
+				<ch continuous="4" type="note" value="57" />
+			</top>
+			<bottom>
+				<ch continuous="4" type="note" value="73" />
+				<ch continuous="4" type="note" value="89" />
+			</bottom>
+		</buttons>
+		<cursors>
+			<ch continuous="4" type="control" value="104" />
+		</cursors>
+		<other_buttons>
+			<ch continuous="4" type="note" value="105" />
+		</other_buttons>
+	</template>
+	<template id="9"><!-- factory template 2 -->
+		<knobs>
+			<top><ch continuous="8" type="control" value="13" /></top>
+			<center><ch continuous="8" type="control" value="29" /></center>
+			<bottom><ch continuous="8" type="control" value="49" /></bottom>
+		</knobs>
+		<faders><ch continuous="8" type="control" value="77" /></faders>
+		<buttons>
+			<top>
+				<ch continuous="4" type="note" value="41" />
+				<ch continuous="4" type="note" value="57" />
+			</top>
+			<bottom>
+				<ch continuous="4" type="note" value="73" />
+				<ch continuous="4" type="note" value="89" />
+			</bottom>
+		</buttons>
+		<cursors>
+			<ch continuous="4" type="control" value="104" />
+		</cursors>
+		<other_buttons>
+			<ch continuous="4" type="note" value="105" />
+		</other_buttons>
+	</template>
+	<template id="10"><!-- factory template 3 -->
+		<knobs>
+			<top><ch continuous="8" type="control" value="13" /></top>
+			<center><ch continuous="8" type="control" value="29" /></center>
+			<bottom><ch continuous="8" type="control" value="49" /></bottom>
+		</knobs>
+		<faders><ch continuous="8" type="control" value="77" /></faders>
+		<buttons>
+			<top>
+				<ch continuous="4" type="note" value="41" />
+				<ch continuous="4" type="note" value="57" />
+			</top>
+			<bottom>
+				<ch continuous="4" type="note" value="73" />
+				<ch continuous="4" type="note" value="89" />
+			</bottom>
+		</buttons>
+		<cursors>
+			<ch continuous="4" type="control" value="104" />
+		</cursors>
+		<other_buttons>
+			<ch continuous="4" type="note" value="105" />
+		</other_buttons>
+	</template>
+	<template id="11"><!-- factory template 4 -->
+		<knobs>
+			<top><ch continuous="8" type="control" value="13" /></top>
+			<center><ch continuous="8" type="control" value="29" /></center>
+			<bottom><ch continuous="8" type="control" value="49" /></bottom>
+		</knobs>
+		<faders><ch continuous="8" type="control" value="77" /></faders>
+		<buttons>
+			<top>
+				<ch continuous="4" type="note" value="41" />
+				<ch continuous="4" type="note" value="57" />
+			</top>
+			<bottom>
+				<ch continuous="4" type="note" value="73" />
+				<ch continuous="4" type="note" value="89" />
+			</bottom>
+		</buttons>
+		<cursors>
+			<ch continuous="4" type="control" value="104" />
+		</cursors>
+		<other_buttons>
+			<ch continuous="4" type="note" value="105" />
+		</other_buttons>
+	</template>
+	<template id="12"><!-- factory template 5 -->
+		<knobs>
+			<top><ch continuous="8" type="control" value="13" /></top>
+			<center><ch continuous="8" type="control" value="29" /></center>
+			<bottom><ch continuous="8" type="control" value="49" /></bottom>
+		</knobs>
+		<faders><ch continuous="8" type="control" value="77" /></faders>
+		<buttons>
+			<top>
+				<ch continuous="4" type="note" value="41" />
+				<ch continuous="4" type="note" value="57" />
+			</top>
+			<bottom>
+				<ch continuous="4" type="note" value="73" />
+				<ch continuous="4" type="note" value="89" />
+			</bottom>
+		</buttons>
+		<cursors>
+			<ch continuous="4" type="control" value="104" />
+		</cursors>
+		<other_buttons>
+			<ch continuous="4" type="note" value="105" />
+		</other_buttons>
+	</template>
+	<template id="13"><!-- factory template 6 -->
+		<knobs>
+			<top><ch continuous="8" type="control" value="13" /></top>
+			<center><ch continuous="8" type="control" value="29" /></center>
+			<bottom><ch continuous="8" type="control" value="49" /></bottom>
+		</knobs>
+		<faders><ch continuous="8" type="control" value="77" /></faders>
+		<buttons>
+			<top>
+				<ch continuous="4" type="note" value="41" />
+				<ch continuous="4" type="note" value="57" />
+			</top>
+			<bottom>
+				<ch continuous="4" type="note" value="73" />
+				<ch continuous="4" type="note" value="89" />
+			</bottom>
+		</buttons>
+		<cursors>
+			<ch continuous="4" type="control" value="104" />
+		</cursors>
+		<other_buttons>
+			<ch continuous="4" type="note" value="105" />
+		</other_buttons>
+	</template>
+	<template id="14"><!-- factory template 7 -->
+		<knobs>
+			<top><ch continuous="8" type="control" value="13" /></top>
+			<center><ch continuous="8" type="control" value="29" /></center>
+			<bottom><ch continuous="8" type="control" value="49" /></bottom>
+		</knobs>
+		<faders><ch continuous="8" type="control" value="77" /></faders>
+		<buttons>
+			<top>
+				<ch continuous="4" type="note" value="41" />
+				<ch continuous="4" type="note" value="57" />
+			</top>
+			<bottom>
+				<ch continuous="4" type="note" value="73" />
+				<ch continuous="4" type="note" value="89" />
+			</bottom>
+		</buttons>
+		<cursors>
+			<ch continuous="4" type="control" value="104" />
+		</cursors>
+		<other_buttons>
+			<ch continuous="4" type="note" value="105" />
+		</other_buttons>
+	</template>
+	<template id="15"><!-- factory template 8 -->
+		<knobs>
+			<top><ch continuous="8" type="control" value="13" /></top>
+			<center><ch continuous="8" type="control" value="29" /></center>
+			<bottom><ch continuous="8" type="control" value="49" /></bottom>
+		</knobs>
+		<faders><ch continuous="8" type="control" value="77" /></faders>
+		<buttons>
+			<top>
+				<ch continuous="4" type="note" value="41" />
+				<ch continuous="4" type="note" value="57" />
+			</top>
+			<bottom>
+				<ch continuous="4" type="note" value="73" />
+				<ch continuous="4" type="note" value="89" />
+			</bottom>
+		</buttons>
+		<cursors>
+			<ch continuous="4" type="control" value="104" />
+		</cursors>
+		<other_buttons>
+			<ch continuous="4" type="note" value="105" />
+		</other_buttons>
+	</template>
+</launch_control_xl>
