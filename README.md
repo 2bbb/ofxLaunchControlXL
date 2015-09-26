@@ -1,6 +1,6 @@
 # ofxLaunchControlXL
 
-use [novation LAUNCH CONTROL XL]() with openframeworks
+use [novation LAUNCH CONTROL XL](http://global.novationmusic.com/launch/launch-control-xl) with openframeworks
 
 ## API
 
