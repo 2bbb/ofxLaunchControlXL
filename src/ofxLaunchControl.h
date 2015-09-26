@@ -11,7 +11,6 @@
 #include "ofxXmlSettings.h"
 
 #include "Poco/Base64Decoder.h"
-#include "Poco/Base64Encoder.h"
 
 class ofxLaunchControlXL : public ofxMidiListener {
 public:
@@ -31,6 +30,126 @@ public:
         Solo,
         RecordArm
     } Type;
+
+    void listPorts() {
+        midiIn.listPorts();
+    }
+    
+    void getPortName(int portID) {
+        return midiIn.getPortName(portID);
+    }
+    
+    void setup(const string &name = "Launch Control XL") {
+        loadSetting();
+        
+        midiIn.openPort(name);
+        midiIn.ignoreTypes(false);
+        midiIn.addListener(this);
+        midiOut.openPort(name);
+        ofAddListener(ofEvents().exit, this, &ofxLaunchControlXL::exit);
+        initValues();
+        turnOffAllLEDs();
+        currentTemplateIndex = -1;
+        setTemplate(currentTemplateIndex);
+    }
+    
+    // position = 0-origin
+    template <typename T>
+    void registerValue(T &value, int templateIndex, ofxLaunchControlXL::Type type, int position = 0) {
+        registerImpl(value, templateIndex, type, position, false);
+    }
+    
+    template <typename T>
+    inline void registerValue(T &value, ofxLaunchControlXL::Type type) {
+        registerValue(value, 0, type, 0);
+    }
+    
+    template <typename T>
+    inline void registerValue(T &value, ofxLaunchControlXL::Type type, int position) {
+        registerValue(value, 0, type, position);
+    }
+    
+    template <typename T>
+    void registerValueAsToggle(T &value, int templateIndex, ofxLaunchControlXL::Type type, int position = 0) {
+        switch(type) {
+            case TopKnob:
+            case CenterKnob:
+            case BottomKnob:
+            case Fader:
+                ofLogError("ofxLaunchControl") << "type is not button type";
+                return;
+            default:
+                break;
+        }
+        registerImpl(value, templateIndex, type, position, true);
+    }
+    
+    template <typename T>
+    inline void registerValueAsToggle(T &value, ofxLaunchControlXL::Type type) {
+        registerValueAsToggle(value, 0, type, 0);
+    }
+    
+    template <typename T>
+    inline void registerValueAsToggle(T &value, ofxLaunchControlXL::Type type, int position) {
+        registerValueAsToggle(value, 0, type, position);
+    }
+    
+    void setValueForToggleButton(bool enable, int templateIndex, int type, int index = -1) {
+        toggle_sysex_message[7] = templateIndex;
+        toggle_sysex_message[9] = enable ? 127 : 0;
+        int loop = ((type == TopButton) || (type == BottomButton)) && (index = -1) ? 8 : 1;
+        for(int i = 0; i < loop; i++) {
+            if(loop == 8) {
+                index = i;
+            }
+            switch(type) {
+                case TopButton:
+                    toggle_sysex_message[8] = 0 + index;
+                    break;
+                case BottomButton:
+                    toggle_sysex_message[8] = 8 + index;
+                    break;
+                case Device:
+                case Mute:
+                case Solo:
+                case RecordArm:
+                    toggle_sysex_message[8] = 16 + (type - Device);
+                    break;
+                case SendSelectUp:
+                case SendSelectDown:
+                case TrackSelectLeft:
+                case TrackSelectRight:
+                    toggle_sysex_message[8] = 20 + (type - SendSelectUp);
+                    break;
+                default:
+                    break;
+            }
+            ofLogNotice("ofxLaunchControlXL") << "set to toggle" << toggle_sysex_message[7] << ", " << (int)toggle_sysex_message[8] << ", " << (int)toggle_sysex_message[9];
+            midiOut.sendMidiBytes(toggle_sysex_message);
+        }
+    }
+    
+    int getCurrentTemplate() const {
+        return currentTemplateIndex;
+    }
+    
+    void setTemplate(int templateIndex) {
+        if(templateIndex < 0) templateIndex = 0;
+        if(15 < templateIndex) templateIndex = 15;
+        if(currentTemplateIndex != templateIndex) {
+            currentTemplateIndex = templateIndex;
+            change_template_sysex_message[7] = templateIndex;
+            midiOut.sendMidiBytes(change_template_sysex_message);
+        }
+    }
+    
+    inline void selectNextTemplate() {
+        setTemplate(currentTemplateIndex + 1);
+    }
+    
+    inline void selectPreviousTemplate() {
+        setTemplate(currentTemplateIndex - 1);
+    }
 
 private:
     static const char *defaultXMLbase64;
@@ -359,127 +478,6 @@ private:
         midiIn.removeListener(this);
         midiOut.closePort();
         ofRemoveListener(ofEvents().exit, this, &ofxLaunchControlXL::exit);
-    }
-    
-public:
-    void listPorts() {
-        midiIn.listPorts();
-    }
-    
-    void getPortName(int portID) {
-        return midiIn.getPortName(portID);
-    }
-    
-    void setup(const string &name = "Launch Control XL") {
-        loadSetting();
-        
-        midiIn.openPort(name);
-        midiIn.ignoreTypes(false);
-        midiIn.addListener(this);
-        midiOut.openPort(name);
-        ofAddListener(ofEvents().exit, this, &ofxLaunchControlXL::exit);
-        initValues();
-        turnOffAllLEDs();
-        currentTemplateIndex = -1;
-        setTemplate(currentTemplateIndex);
-    }
-    
-    // position = 0-origin
-    template <typename T>
-    void registerValue(T &value, int templateIndex, ofxLaunchControlXL::Type type, int position = 0) {
-        registerImpl(value, templateIndex, type, position, false);
-    }
-    
-    template <typename T>
-    inline void registerValue(T &value, ofxLaunchControlXL::Type type) {
-        registerValue(value, 0, type, 0);
-    }
-    
-    template <typename T>
-    inline void registerValue(T &value, ofxLaunchControlXL::Type type, int position) {
-        registerValue(value, 0, type, position);
-    }
-    
-    template <typename T>
-    void registerValueAsToggle(T &value, int templateIndex, ofxLaunchControlXL::Type type, int position = 0) {
-        switch(type) {
-            case TopKnob:
-            case CenterKnob:
-            case BottomKnob:
-            case Fader:
-                ofLogError("ofxLaunchControl") << "type is not button type";
-                return;
-            default:
-                break;
-        }
-        registerImpl(value, templateIndex, type, position, true);
-    }
-    
-    template <typename T>
-    inline void registerValueAsToggle(T &value, ofxLaunchControlXL::Type type) {
-        registerValueAsToggle(value, 0, type, 0);
-    }
-    
-    template <typename T>
-    inline void registerValueAsToggle(T &value, ofxLaunchControlXL::Type type, int position) {
-        registerValueAsToggle(value, 0, type, position);
-    }
-    
-    void setValueForToggleButton(bool enable, int templateIndex, int type, int index = -1) {
-        toggle_sysex_message[7] = templateIndex;
-        toggle_sysex_message[9] = enable ? 127 : 0;
-        int loop = ((type == TopButton) || (type == BottomButton)) && (index = -1) ? 8 : 1;
-        for(int i = 0; i < loop; i++) {
-            if(loop == 8) {
-                index = i;
-            }
-            switch(type) {
-                case TopButton:
-                    toggle_sysex_message[8] = 0 + index;
-                    break;
-                case BottomButton:
-                    toggle_sysex_message[8] = 8 + index;
-                    break;
-                case Device:
-                case Mute:
-                case Solo:
-                case RecordArm:
-                    toggle_sysex_message[8] = 16 + (type - Device);
-                    break;
-                case SendSelectUp:
-                case SendSelectDown:
-                case TrackSelectLeft:
-                case TrackSelectRight:
-                    toggle_sysex_message[8] = 20 + (type - SendSelectUp);
-                    break;
-                default:
-                    break;
-            }
-            ofLogNotice("ofxLaunchControlXL") << "set to toggle" << toggle_sysex_message[7] << ", " << (int)toggle_sysex_message[8] << ", " << (int)toggle_sysex_message[9];
-            midiOut.sendMidiBytes(toggle_sysex_message);
-        }
-    }
-    
-    int getCurrentTemplate() const {
-        return currentTemplateIndex;
-    }
-    
-    void setTemplate(int templateIndex) {
-        if(templateIndex < 0) templateIndex = 0;
-        if(15 < templateIndex) templateIndex = 15;
-        if(currentTemplateIndex != templateIndex) {
-            currentTemplateIndex = templateIndex;
-            change_template_sysex_message[7] = templateIndex;
-            midiOut.sendMidiBytes(change_template_sysex_message);
-        }
-    }
-    
-    inline void selectNextTemplate() {
-        setTemplate(currentTemplateIndex + 1);
-    }
-    
-    inline void selectPreviousTemplate() {
-        setTemplate(currentTemplateIndex - 1);
     }
 };
 
