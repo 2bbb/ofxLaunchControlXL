@@ -208,13 +208,13 @@ private:
     bool getChannels(int templateID, int typeOrigin, ofxXmlSettings &setting) {
         const int chNum = setting.getNumTags("ch");
         for(int i = 0; i < chNum; i++) {
-            const int value = setting.getAttribute("ch", "value", i);
+            const int value = setting.getAttribute("ch", "value", 0, i);
             const std::string type = setting.getAttribute("ch", "type", "");
             int continuous = setting.getAttribute("ch", "continuous", 1);
             for(int j = 0; j < continuous; j++) {
                 register_map.insert(
                     RegisterMap::value_type(
-                        RegisterKey(templateID, (Type)(typeOrigin + i + j)),
+                        RegisterKey(templateID, (Type)(typeOrigin + i*continuous + j)),
                         ExecuteHint(value + j, type == "control")
                     )
                 );
@@ -392,13 +392,8 @@ private:
             led_map.insert(std::make_pair(TopKnob + i, i));
             led_map.insert(std::make_pair(CenterKnob + i, 8 + i));
             led_map.insert(std::make_pair(BottomKnob + i, 16 + i));
-            if(i < 4) {
-                led_map.insert(std::make_pair(TopButton + i, 24 + i));
-                led_map.insert(std::make_pair(BottomButton + i, 32 + i));
-            } else {
-                led_map.insert(std::make_pair(TopButton + i + 12, 24 + i));
-                led_map.insert(std::make_pair(BottomButton + i + 12, 32 + i));
-            }
+            led_map.insert(std::make_pair(TopButton + i, 24 + i));
+            led_map.insert(std::make_pair(BottomButton + i, 32 + i));
         }
         for(int i = 0; i < 4; i++) {
             led_map.insert(std::make_pair(SendSelectUp + i, 44 + i));
