@@ -57,9 +57,16 @@ templateIndex = 0 then assign to `User Template 1`, 8 then assign to `Factory Te
 
 **ValueType** is integer type of floating point type.
 
-### Constant
+### switching Template
 
-#### ofxLaunchControlXL::Type
+* int getCurrentTemplate() const
+* void setTemplate(int templateIndex)
+* void selectNextTemplate()
+* void selectPreviousTemplate()
+
+## Constant
+
+### ofxLaunchControlXL::Type
 
 * TopKnob
 * CenterKnob
@@ -79,7 +86,7 @@ templateIndex = 0 then assign to `User Template 1`, 8 then assign to `Factory Te
 TopKnob, CenterKnob, BottomKnob, Fader, TopButton and BottomButton will need position (0-7) when register.
 if assign position with Other buttons, then position will ignore.
 
-#### ofxLaunchControlXL::LedColorMode
+### ofxLaunchControlXL::LedColorMode
 
 * ofxLaunchControlXL::LedColorGreen
 * ofxLaunchControlXL::LedColorRed
@@ -100,9 +107,9 @@ LedColor**Xxx**Static : brightness is max always.
 
 LedColorOff : always off.
 
-### if you use Customized Launch Control XL
+## if you use Customized Launch Control XL
 
-edit launch_control_xl_settings.xml (default xml is automatically add to bin/data)
+please edit launch_control_xl_settings.xml (default xml is automatically add to bin/data)
 
 ## Update history
 
