@@ -15,6 +15,19 @@
 class ofxLaunchControlXL : public ofxMidiListener {
 public:
     typedef enum {
+        LedColorGreen,
+        LedColorRed,
+        LedColorYellow,
+        LedColorGreenFullRange,
+        LedColorRedFullRange,
+        LedColorYellowFullRange,
+        LedColorGreenStatic,
+        LedColorRedStatic,
+        LedColorYellowStatic,
+        LedColorOff
+    } LedColorMode;
+    
+    typedef enum {
         TopKnob,
         CenterKnob = 8,
         BottomKnob = 16,
@@ -55,22 +68,22 @@ public:
     
     // position = 0-origin
     template <typename T>
-    void registerValue(T &value, int templateIndex, ofxLaunchControlXL::Type type, int position = 0) {
-        registerImpl(value, templateIndex, type, position, false);
+    void registerValue(T &value, int templateIndex, ofxLaunchControlXL::Type type, int position = 0, ofxLaunchControlXL::LedColorMode color = LedColorGreen) {
+        registerImpl(value, templateIndex, type, position, false, color);
     }
     
     template <typename T>
-    inline void registerValue(T &value, ofxLaunchControlXL::Type type) {
-        registerValue(value, 0, type, 0);
+    inline void registerValue(T &value, ofxLaunchControlXL::Type type, ofxLaunchControlXL::LedColorMode color = LedColorGreen) {
+        registerValue(value, 0, type, 0, color);
     }
     
     template <typename T>
-    inline void registerValue(T &value, ofxLaunchControlXL::Type type, int position) {
-        registerValue(value, 0, type, position);
+    inline void registerValue(T &value, ofxLaunchControlXL::Type type, int position, ofxLaunchControlXL::LedColorMode color = LedColorGreen) {
+        registerValue(value, 0, type, position, color);
     }
     
     template <typename T>
-    void registerValueAsToggle(T &value, int templateIndex, ofxLaunchControlXL::Type type, int position = 0) {
+    void registerValueAsToggle(T &value, int templateIndex, ofxLaunchControlXL::Type type, int position = 0, ofxLaunchControlXL::LedColorMode color = LedColorGreen) {
         switch(type) {
             case TopKnob:
             case CenterKnob:
@@ -81,17 +94,17 @@ public:
             default:
                 break;
         }
-        registerImpl(value, templateIndex, type, position, true);
+        registerImpl(value, templateIndex, type, position, true, color);
     }
     
     template <typename T>
-    inline void registerValueAsToggle(T &value, ofxLaunchControlXL::Type type) {
-        registerValueAsToggle(value, 0, type, 0);
+    inline void registerValueAsToggle(T &value, ofxLaunchControlXL::Type type, ofxLaunchControlXL::LedColorMode color = LedColorGreen) {
+        registerValueAsToggle(value, 0, type, 0, color);
     }
     
     template <typename T>
-    inline void registerValueAsToggle(T &value, ofxLaunchControlXL::Type type, int position) {
-        registerValueAsToggle(value, 0, type, position);
+    inline void registerValueAsToggle(T &value, ofxLaunchControlXL::Type type, int position, ofxLaunchControlXL::LedColorMode color = LedColorGreen) {
+        registerValueAsToggle(value, 0, type, position, color);
     }
     
     void setValueForToggleButton(bool enable, int templateIndex, int type, int index = -1) {
@@ -166,6 +179,7 @@ private:
         bool is_control;
         bool as_toggle;
         int type;
+        LedColorMode led_color;
     };
     
     template <typename T>
@@ -356,7 +370,7 @@ private:
         } else {
             it->second->set(value);
         }
-        setLED(currentTemplateIndex, it->second->type, it->second->get());
+        setLED(currentTemplateIndex, it->second->type, it->second->get(), it->second->led_color);
     }
     
     bool hasLED(MidiValue note) const {
@@ -364,15 +378,49 @@ private:
     }
     
     inline int createLEDValue(unsigned char red, unsigned char green) {
-        green = MIN(green, 3);
-        return ((green << 4) | MIN(red, 3) | 12);
+        return ((MIN(green, 3) << 4) | MIN(red, 3) | 12);
     }
     
-    void setLED(MidiValue channel, MidiValue note, MidiValue value) {
+    void setLED(MidiValue channel, MidiValue note, MidiValue value, LedColorMode color) {
         if(!hasLED(note)) return;
         led_sysex_message[7] = currentTemplateIndex;
         led_sysex_message[8] = led_map[note];
-        led_sysex_message[9] = createLEDValue(0, value ? (value / 43 + 1) : 0);
+        MidiValue mapped = value ? ((value - 1) / 63 + 2) : 1,
+                  fullRange = value ? (value / 43 + 1) : 0;
+        MidiValue color_value;
+        switch (color) {
+            case LedColorGreen:
+                color_value = createLEDValue(0, mapped);
+                break;
+            case LedColorRed:
+                color_value = createLEDValue(mapped, 0);
+                break;
+            case LedColorYellow:
+                color_value = createLEDValue(mapped, mapped);
+                break;
+            case LedColorGreenFullRange:
+                color_value = createLEDValue(0, fullRange);
+                break;
+            case LedColorRedFullRange:
+                color_value = createLEDValue(fullRange, 0);
+                break;
+            case LedColorYellowFullRange:
+                color_value = createLEDValue(fullRange, fullRange);
+                break;
+            case LedColorGreenStatic:
+                color_value = createLEDValue(0, 3);
+                break;
+            case LedColorRedStatic:
+                color_value = createLEDValue(3, 0);
+                break;
+            case LedColorYellowStatic:
+                color_value = createLEDValue(3, 3);
+                break;
+            default:
+                color_value = 0;
+                break;
+        }
+        led_sysex_message[9] = color_value;
         midiOut.sendMidiBytes(led_sysex_message);
     }
     
@@ -444,7 +492,7 @@ private:
     }
     
     template <typename T>
-    inline void registerImpl(T &value, int templateIndex, ofxLaunchControlXL::Type type, int position, bool asToggle) {
+    inline void registerImpl(T &value, int templateIndex, ofxLaunchControlXL::Type type, int position, bool asToggle, ofxLaunchControlXL::LedColorMode color) {
         if(templateIndex < 0 || 15 < templateIndex) {
             ofLogError("ofxLaunchControlXL") << "template index: out of bounds";
             return;
@@ -460,6 +508,7 @@ private:
         binder->is_control = it->second.second;
         binder->type       = type + position;
         binder->as_toggle  = asToggle;
+        binder->led_color = color;
         if(value_map.find(execute_key) == value_map.end()) {
             value_map.insert(std::make_pair(execute_key, binder));
         } else {
