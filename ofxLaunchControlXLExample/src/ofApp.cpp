@@ -9,14 +9,14 @@ class ofApp : public ofBaseApp {
 public:
     void setup() {
         control.setup();
-        control.registerValue(fg.r, ofxLaunchControlXL::TopKnob, 0);
-        control.registerValue(fg.g, ofxLaunchControlXL::TopKnob, 1);
-        control.registerValue(fg.b, ofxLaunchControlXL::TopKnob, 2);
-        control.registerValue(bg.r, ofxLaunchControlXL::CenterKnob, 3);
-        control.registerValue(bg.g, ofxLaunchControlXL::CenterKnob, 4);
-        control.registerValue(bg.b, ofxLaunchControlXL::CenterKnob, 5);
-        control.registerValueAsToggle(toggle_button, ofxLaunchControlXL::TopButton, 0);
-        control.registerValue(not_toggle_button, ofxLaunchControlXL::TopButton, 1);
+        control.registerValue(fg.r, ofxLaunchControlXL::TopKnob, 0, ofxLaunchControlXL::LedColorGreen);
+        control.registerValue(fg.g, ofxLaunchControlXL::TopKnob, 1, ofxLaunchControlXL::LedColorRed);
+        control.registerValue(fg.b, ofxLaunchControlXL::TopKnob, 2, ofxLaunchControlXL::LedColorYellow);
+        control.registerValue(bg.r, ofxLaunchControlXL::CenterKnob, 0, ofxLaunchControlXL::LedColorGreenFullRange);
+        control.registerValue(bg.g, ofxLaunchControlXL::CenterKnob, 1, ofxLaunchControlXL::LedColorRedFullRange);
+        control.registerValue(bg.b, ofxLaunchControlXL::CenterKnob, 2, ofxLaunchControlXL::LedColorYellowFullRange);
+        control.registerValueAsToggle(toggle_button, ofxLaunchControlXL::TopButton, 0, ofxLaunchControlXL::LedColorGreen);
+        control.registerValue(not_toggle_button, ofxLaunchControlXL::TopButton, 1, ofxLaunchControlXL::LedColorRedFullRange);
         for(int i = 0; i < 8; i++) {
             control.registerValue(fader_values[i], ofxLaunchControlXL::Fader, i);
         }
