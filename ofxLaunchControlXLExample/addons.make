@@ -1,1 +1,3 @@
+ofxLaunchControlXL
 ofxMidi
+ofxXmlSettings
