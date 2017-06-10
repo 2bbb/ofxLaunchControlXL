@@ -36,7 +36,7 @@ templateIndex = 0 then assign to `User Template 1`, 8 then assign to `Factory Te
 
 #### example
 
-```
+```cpp
 	typedef ofxLaunchControlXL LCXL;
 	int position = 1;
 	int templateIndex = 2;
