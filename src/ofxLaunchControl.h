@@ -48,7 +48,7 @@ public:
         midiIn.listPorts();
     }
     
-    void getPortName(int portID) {
+    std::string getPortName(int portID) {
         return midiIn.getPortName(portID);
     }
     
