@@ -175,7 +175,7 @@ private:
     struct value_binder_base {
         virtual void set(MidiValue value) {}
         virtual void toggle() {}
-        virtual MidiValue get() const {}
+        virtual MidiValue get() const { return 0; }
         bool is_control;
         bool as_toggle;
         int type;
