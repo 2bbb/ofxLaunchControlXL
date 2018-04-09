@@ -113,6 +113,10 @@ please edit launch_control_xl_settings.xml (default xml is automatically add to 
 
 ## Update history
 
+### 2018/04/09 ver 0.0.3 release
+
+* bugfix for windows. (thx: [yumataesu](https://github.com/yumataesu))
+
 ### 2015/10/22 ver 0.0.2 release
 
 * add LedColorMode
