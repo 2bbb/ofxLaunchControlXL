@@ -47,11 +47,11 @@ public:
     } Type;
 
     void listPorts() {
-        midiIn.listPorts();
+        midiIn.listInPorts();
     }
     
     std::string getPortName(int portID) {
-        return midiIn.getPortName(portID);
+        return midiIn.getInPortName(portID);
     }
     
     void setup(const string &name = "Launch Control XL") {
