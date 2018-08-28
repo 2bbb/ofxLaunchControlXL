@@ -14,6 +14,20 @@
 
 static std::string defaultXMLbase64();
 
+template <typename checkee_type>
+struct check_ofxMidiIn_is_old {
+    template <typename, typename> struct checker;
+    
+    template <typename checkee>
+    static std::true_type test(checker<checkee, decltype(&checkee::listInPorts)> *);
+    template <typename checkee>
+    static std::false_type test(...);
+    
+    typedef decltype(test<checkee_type>(nullptr)) type;
+    static const bool value = type::value;
+};
+static constexpr bool ofxMidiIn_is_old = check_ofxMidiIn_is_old<ofxMidiIn>::value;
+
 class ofxLaunchControlXL : public ofxMidiListener {
 public:
     typedef enum {
@@ -45,14 +59,26 @@ public:
         Solo,
         RecordArm
     } Type;
-
-    void listPorts() {
-        midiIn.listInPorts();
-    }
     
-    std::string getPortName(int portID) {
-        return midiIn.getInPortName(portID);
-    }
+    template <typename type = ofxMidiIn>
+    auto listPorts()
+    -> typename std::enable_if<check_ofxMidiIn_is_old<type>::value>::type
+    { static_cast<type &>(midiIn).listPorts(); }
+    
+    template <typename type = ofxMidiIn>
+    auto listPorts()
+    -> typename std::enable_if<!check_ofxMidiIn_is_old<type>::value>::type
+    { static_cast<type &>(midiIn).listInPorts(); }
+    
+    template <typename type = ofxMidiIn>
+    auto getPortName(int portID)
+    -> typename std::enable_if<check_ofxMidiIn_is_old<type>::value, std::string>::type
+    { return static_cast<type &>(midiIn).getPortName(portID); }
+
+    template <typename type = ofxMidiIn>
+    auto getPortName(int portID)
+    -> typename std::enable_if<!check_ofxMidiIn_is_old<type>::value, std::string>::type
+    { return static_cast<type &>(midiIn).getInPortName(portID); }
     
     void setup(const string &name = "Launch Control XL") {
         loadSetting();
