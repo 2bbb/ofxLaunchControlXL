@@ -6,6 +6,7 @@ use [novation LAUNCH CONTROL XL](http://global.novationmusic.com/launch/launch-c
 
 * ofxXmlSettings
 * [ofxMidi](https://github.com/danomatika/ofxMidi) by [danomiatka](https://github.com/danomatika/)
+* ofxPoco (thanks [edap](https://github.com/edap/)!)
 
 ## API
 
